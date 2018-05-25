@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/victor/Victor/Mario/Objetos v1/objetos.cpp
+/home/sagas/opengl/SMB/objetos.cpp
 GL/gl.h
 -
 GL/glu.h

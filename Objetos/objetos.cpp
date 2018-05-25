@@ -12,7 +12,7 @@ GLUquadricObj *pSphere = NULL;
 void text()
 {
     char text[32];
-    sprintf(text, "X:%.0f Y:%.0f", xrot, yrot);
+    sprintf(text, "Y:%.0f X:%.0f", xrot, yrot);
     glColor3f(0, 0, 0);
     glRasterPos3f( -30 , 15 , zoom);
     for(int i = 0; text[i] != '\0'; i++)
@@ -118,11 +118,11 @@ void specialKeys( int key, int x, int y )
 
     //  Flecha derecha: aumentar rotación 7 grados
     if (key == GLUT_KEY_RIGHT)
-         yrot -= 3.0;
+         yrot += 3.0;
 
     //  Flecha izquierda: rotación en eje Y negativo 7 grados
     else if (key == GLUT_KEY_LEFT)
-        yrot += 3.0;
+        yrot -= 3.0;
     //  Flecha arriba: rotación en eje X positivo 7 grados
     else if (key == GLUT_KEY_UP)
          xrot += 3.0;

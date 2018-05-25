@@ -1,0 +1,3 @@
+/home/sagas/opengl/SMB/build/CMakeFiles/rebuild_cache.dir
+/home/sagas/opengl/SMB/build/CMakeFiles/edit_cache.dir
+/home/sagas/opengl/SMB/build/CMakeFiles/escena.dir

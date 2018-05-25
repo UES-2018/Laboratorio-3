@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/victor/Victor/Mario/Objetos v1/objetos.cpp" "/home/victor/Victor/Mario/Objetos v1/build/CMakeFiles/escena.dir/objetos.cpp.o"
+  "/home/sagas/opengl/SMB/objetos.cpp" "/home/sagas/opengl/SMB/build/CMakeFiles/escena.dir/objetos.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
