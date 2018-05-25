@@ -173,7 +173,7 @@ void specialKeys( int key, int x, int y )
 	if (key == GLUT_KEY_RIGHT){
 					//				rotate_y += 7;}
 						//rotate_y -= 7;
-					X+=5;
+					X+=10;
 					//Z=Z+X;}
 					
 					}
@@ -181,7 +181,7 @@ void specialKeys( int key, int x, int y )
 	//  Flecha izquierda: rotación en eje Y negativo 7 grados
 	else if (key == GLUT_KEY_LEFT){
 								//rotate_y -= 7;
-					X-=5;
+					X-=10;
 					//Z=Z+X;}
 					}
 	/*//  Flecha arriba: rotación en eje X positivo 7 grados
