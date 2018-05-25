@@ -1,3 +1,0 @@
-/home/victor/Victor/Mario/Objetos v1/build/CMakeFiles/rebuild_cache.dir
-/home/victor/Victor/Mario/Objetos v1/build/CMakeFiles/edit_cache.dir
-/home/victor/Victor/Mario/Objetos v1/build/CMakeFiles/escena.dir
