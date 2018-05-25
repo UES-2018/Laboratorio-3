@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/victor/Victor/Mario/Objetos v1/objetos.cpp
+GL/gl.h
+-
+GL/glu.h
+-
+GL/glut.h
+-
+cstdio
+-
+SOIL/SOIL.h
+-
+

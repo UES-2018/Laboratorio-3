@@ -23,6 +23,15 @@ void init(void)
 	
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
+void esce(float xx,float yy,float xx1, float yy1)
+{	
+	glNormal3f( 0.0f, -1.0f,0.0f);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(xx, yy, 0.0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(xx, yy1, 0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(xx1, yy1, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(xx1, yy, 0.0);
+	
+	}
 void display()
 {
 	
@@ -71,13 +80,9 @@ void display()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	double i=0,ini=0,fin=120;
 	glBegin(GL_POLYGON);
-	for (i=0; i<=3; i+=1){
+	for (i=0; i<=2; i+=1){
 		
-	glNormal3f( 0.0f, -1.0f,0.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(ini, 0, 0.0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(ini, 80, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(fin, 80, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(fin, 0, 0.0);
+		esce(ini,0,fin,80);
 	ini=fin;
 	fin+=120;
 	
