@@ -110,12 +110,15 @@ void pinos (float r,float al, float rc ,float alc)
     
     glTranslatef(0,0,0);
 	glRotatef(-90, 1.0, 0.0, 0.0);
-    draw_cylinder(r, al, 216, 211, 211);
+	cylinder = gluNewQuadric();
+	gluQuadricTexture(cylinder,texture[3]);
+	gluQuadricDrawStyle( cylinder, GLU_FILL );
+    gluCylinder(cylinder,r, al, 9, 211, 211);
     glPopMatrix();
 	
 	glPushMatrix();
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[4]);
+	glBindTexture(GL_TEXTURE_2D, texture[5]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTranslated(0.0,al,0.0);
@@ -195,6 +198,13 @@ void display()
 	texture[4] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
 														(
 		"../img/barril.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+							);
+		texture[5] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+														(
+		"../img/orilla.png",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT

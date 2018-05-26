@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/sagas/opengl/SMB/github/Escenario/Escena.cpp" "/home/sagas/opengl/SMB/github/Escenario/build/CMakeFiles/escena.dir/Escena.cpp.o"
+  "/home/victor/Victor/Mario/Escenario/Escena.cpp" "/home/victor/Victor/Mario/Escenario/build/CMakeFiles/escena.dir/Escena.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

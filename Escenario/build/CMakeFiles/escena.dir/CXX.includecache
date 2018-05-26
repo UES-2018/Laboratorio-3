@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/sagas/opengl/SMB/github/Escenario/Escena.cpp
+/home/victor/Victor/Mario/Escenario/Escena.cpp
 stdio.h
 -
 GL/gl.h
