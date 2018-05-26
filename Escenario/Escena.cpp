@@ -18,7 +18,9 @@ GLfloat scale = 1.0f;
 
 void init(void)
 {
-     glDepthFunc(GL_LESS); //comparación de profundidad
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0); //Activamos las luces en 
+    glDepthFunc(GL_LESS); //comparación de profundidad
 	glEnable(GL_DEPTH_TEST); //activa GL_DEPTH_TEST
 	
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -63,10 +65,10 @@ void draw_cylinder(GLfloat radius,
 void esce(void)
 {	
 	glNormal3f( 0.0f, -1.0f,0.0f);
-	glTexCoord2f(80.0f, 0.0f); glVertex3f(0, 10, 0.0);
+	glTexCoord2f(80.0f, 0.0f); glVertex3f(0, 5, 0.0);
 	glTexCoord2f(80.0f, 40.0f); glVertex3f(0, 80, 0);
 	glTexCoord2f(0.0f, 40.0f); glVertex3f(550, 80, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 10, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 5, 0.0);
 	
 	}
 		void esfera (float r)
@@ -113,7 +115,7 @@ void pinos (float r,float al, float rc ,float alc)
 	
 	glPushMatrix();
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[2]);
+	glBindTexture(GL_TEXTURE_2D, texture[4]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTranslated(0.0,al,0.0);
@@ -150,7 +152,7 @@ void display()
 							);
 	texture[2] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
 														(
-		"../img/orilla.png",
+		"../img/gra1.png",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
@@ -158,6 +160,13 @@ void display()
 	texture[3] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
 														(
 		"../img/troco.jpg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+							);
+	texture[4] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+														(
+		"../img/orilla.png",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
@@ -197,8 +206,8 @@ void display()
     glBegin(GL_POLYGON);	
 	glNormal3f( -1.0f, 0.0f,0.0f);
 	glTexCoord2f(20.0f, 0.0f); glVertex3f(0, 0, 0.0);
-	glTexCoord2f(20.0f, 1.0f); glVertex3f(0, -15, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(550, -15, 0.0);
+	glTexCoord2f(20.0f, 1.0f); glVertex3f(0, -7, 0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(550, -7, 0.0);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 0, 0.0);
 	
 	glEnd();
@@ -213,9 +222,9 @@ void display()
     //glTranslatef(0,0,0.0000001);
 	glBegin(GL_POLYGON);	
 	glNormal3f( -1.0f, 0.0f,0.0f);
-	glTexCoord2f(20.0f, 0.0f); glVertex3f(0, 0, 0.0);
-	glTexCoord2f(20.0f, 1.0f); glVertex3f(0, 10, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(550, 10, 0.0);
+	glTexCoord2f(120.0f, 0.0f); glVertex3f(0, 0, 0.0);
+	glTexCoord2f(120.0f, 1.0f); glVertex3f(0, 5, 0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(550, 5, 0.0);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 0, 0.0);
 	glEnd();
 	 glDisable(GL_TEXTURE_2D);
@@ -293,12 +302,12 @@ void display()
     for(j1=0;j1<=2;j1+=1){
 	//pino grande
 	glPushMatrix();
-    glTranslatef(cor1,10,1.0);
+    glTranslatef(cor1,4,1.0);
     pinos(2.75,5.0,10,30);
     glPopMatrix();
     //pino pequeño
 	glPushMatrix();
-    glTranslatef(60+cor1,10,1.0);
+    glTranslatef(60+cor1,4,1.0);
     pinos(1.75,3.7,7,18);
     glPopMatrix();
     cor1+=185;
@@ -316,7 +325,7 @@ void resize(int w, int h) {
     glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-0,(Z),-15,80,(-Z),(Z));
+	glOrtho(-0,(Z),-7,80,(-Z),(Z));
 	//gluPerspective(300.0, (float)w / (float)h, 1, 120.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -353,8 +362,9 @@ void specialKeys( int key, int x, int y )
 	//  Tecla especial F2 : rotación en eje Z negativo 7 grados
 	else if (key == GLUT_KEY_F2)
 									rotate_z -= 7;*/
-	//else if (key == GLUT_KEY_HOME)
+	else if (key == GLUT_KEY_HOME){
 									//rotate_z = rotate_x=rotate_y=0;
+									X=0;}
 									
 
 	//  Solicitar actualización de visualización
