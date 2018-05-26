@@ -15,7 +15,9 @@ GLfloat X = 0.0f;
 GLfloat Y = 0.0f;
 GLfloat Z = 125.0f+X;
 GLfloat scale = 1.0f;
-    GLUquadricObj* cylinder;  	
+GLUquadricObj* cylinder;  
+GLUquadricObj *sphere;	
+	
 void init(void)
 {
 	glEnable(GL_LIGHTING);
@@ -147,6 +149,27 @@ void barril (float r,float al)
     glPopMatrix();
 }
 
+void pelota (float r)
+{
+    glPushMatrix();
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[6]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
+    glTranslatef(0,0,0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+
+	sphere = gluNewQuadric();
+	gluQuadricTexture(sphere,texture[6]);
+	gluQuadricDrawStyle( sphere, GLU_FILL);
+	gluQuadricNormals( sphere, GLU_SMOOTH);
+	gluQuadricOrientation( sphere, GLU_OUTSIDE);
+	gluSphere(sphere, r, 200, 200);
+    glPopMatrix();
+}
+
 void display()
 {
 	
@@ -202,9 +225,17 @@ void display()
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
 							);
-		texture[5] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+	texture[5] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
 														(
 		"../img/orilla.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+							);
+							
+	texture[6] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+														(
+		"../img/ball.jpg",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
@@ -285,18 +316,20 @@ void display()
     
     //Barril
 	glPushMatrix();
-    glTranslatef(40,0.0,1.0);
+    glTranslatef(40,4.0,1.0);
     barril(3.5,8.0);
     glPopMatrix();    
     
+    //Balon
+    glPushMatrix();
+    glTranslatef(60,7.0,1.0);
+    pelota(3.0);
+    glPopMatrix();     
+    
     glFlush();
 	glutSwapBuffers();
-	
-	printf("%f ",X);
 
 }
-
-
 
 void resize(int w, int h) {
     glViewport(0, 0, w, h);
@@ -312,19 +345,12 @@ void specialKeys( int key, int x, int y )
 
 	//  Flecha derecha: aumentar rotación 7 grados
 	if (key == GLUT_KEY_RIGHT){
-					//				rotate_y += 7;}
-						//rotate_y -= 7;
-					X+=20;
-					//Z=Z+X;}
-					
-					}
+		X+=20;
+	}
 
-	//  Flecha izquierda: rotación en eje Y negativo 7 grados
 	else if (key == GLUT_KEY_LEFT){
-								//rotate_y -= 7;
-					X-=20;
-					//Z=Z+X;}
-					}
+		X-=20;
+	}
 	/*//  Flecha arriba: rotación en eje X positivo 7 grados
 	else if (key == GLUT_KEY_UP)
 									//rotate_x += 7;
