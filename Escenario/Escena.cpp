@@ -192,15 +192,20 @@ void display()
 	}
 	glEnd();
     glPopMatrix();*/
+    double j=0, cor=0;
+    for(j=0;j<=2;j+=1){
     glPushMatrix();
+    glTranslatef(cor,0,0);
 	nuve();
 	glPopMatrix();
 	glPushMatrix();
 	
-	glTranslatef(90,-20,0);	
+	glTranslatef(90+cor,-20,0);	
 	//glScalef(100,10,0);
 	nuve();
 	glPopMatrix();
+	cor+=190;
+}
 	glFlush();
 	
 	glutSwapBuffers();
