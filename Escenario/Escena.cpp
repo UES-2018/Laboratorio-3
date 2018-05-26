@@ -3,7 +3,7 @@
 #include <GL/glut.h>
 #include <SOIL/SOIL.h>
 #include <math.h>
-
+#define PI 3.1415927
 //Arreglo de imagenes
 GLuint texture[0];
 //Definimos variables
@@ -23,13 +23,50 @@ void init(void)
 	
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
+
+void draw_cylinder(GLfloat radius,
+                   GLfloat height,
+                   GLubyte R,
+                   GLubyte G,
+                   GLubyte B)
+{
+    GLfloat x              = 0.0;
+    GLfloat y              = 0.0;
+    GLfloat angle          = 0.0;
+    GLfloat angle_stepsize = 0.1;
+    glBegin(GL_QUAD_STRIP);
+    angle = 0.0;
+        while( angle < 2*PI ) {
+            x = radius * cos(angle);
+            y = radius * sin(angle);
+            glVertex3f(x, y , height);
+            glVertex3f(x, y , 0.0);
+            angle = angle + angle_stepsize;
+        }
+        glVertex3f(radius, 0.0, height);
+        glVertex3f(radius, 0.0, 0.0);
+    glEnd();
+
+    /** Draw the circle on top of cylinder */
+    glColor3ub(R,G,B);
+    glBegin(GL_POLYGON);
+    angle = 0.0;
+        while( angle < 2*PI ) {
+            x = radius * cos(angle);
+            y = radius * sin(angle);
+            glVertex3f(x, y , height);
+            angle = angle + angle_stepsize;
+        }
+        glVertex3f(radius, 0.0, height);
+    glEnd();
+}
 void esce(void)
 {	
 	glNormal3f( 0.0f, -1.0f,0.0f);
 	glTexCoord2f(80.0f, 0.0f); glVertex3f(0, 10, 0.0);
 	glTexCoord2f(80.0f, 40.0f); glVertex3f(0, 80, 0);
-	glTexCoord2f(0.0f, 40.0f); glVertex3f(450, 80, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(450, 10, 0.0);
+	glTexCoord2f(0.0f, 40.0f); glVertex3f(550, 80, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 10, 0.0);
 	
 	}
 		void esfera (float r)
@@ -59,6 +96,32 @@ void nuve (void){
 	esfera(7.0);
 	glPopMatrix();
 	}
+
+void pinos (float r,float al, float rc ,float alc)
+{
+    glPushMatrix();
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[3]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
+    glTranslatef(0,0,0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+    draw_cylinder(r, al, 216, 211, 211);
+    glPopMatrix();
+	
+	glPushMatrix();
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[2]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTranslated(0.0,al,0.0);
+	glRotatef(-180,0,1.0,1.0);
+	glutSolidCone(rc,alc,100,100);
+	glPopMatrix();
+	}
+
 void display()
 {
 	
@@ -94,7 +157,7 @@ void display()
 							);
 	texture[3] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
 														(
-		"../img/loma2.png",
+		"../img/troco.jpg",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
@@ -135,8 +198,8 @@ void display()
 	glNormal3f( -1.0f, 0.0f,0.0f);
 	glTexCoord2f(20.0f, 0.0f); glVertex3f(0, 0, 0.0);
 	glTexCoord2f(20.0f, 1.0f); glVertex3f(0, -15, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(450, -15, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(450, 0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(550, -15, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 0, 0.0);
 	
 	glEnd();
 	
@@ -152,8 +215,8 @@ void display()
 	glNormal3f( -1.0f, 0.0f,0.0f);
 	glTexCoord2f(20.0f, 0.0f); glVertex3f(0, 0, 0.0);
 	glTexCoord2f(20.0f, 1.0f); glVertex3f(0, 10, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(450, 10, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(450, 0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(550, 10, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 0, 0.0);
 	glEnd();
 	 glDisable(GL_TEXTURE_2D);
 	//loma 2
@@ -172,12 +235,12 @@ void display()
 	glEnd();*/
 	//piso
 	
-	/*glPushMatrix();
-	 glTranslatef(20,-5,1);
+/*	glPushMatrix();
+	 glTranslatef(40,-5,1);
     // Agregar Codigo acá, para dibujar
     //glColor3f(1.0,0.0,0.0);
     glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[2]);
+	glBindTexture(GL_TEXTURE_2D, texture[3]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
      double i1, x, y;   //Declaracion de Variables
@@ -187,7 +250,7 @@ void display()
     for (i1=0.37;i1<=2.770; i1+=0.01)
     {	
 		x=10.5*cos(i1) +0.0;
-		y=40.5*sin(i1) +0.0;	
+		y=20.5*sin(i1) +0.0;	
 		glTexCoord2f(1, 0);glVertex2f(x,y); 		
 	}
 	glEnd();
@@ -206,8 +269,41 @@ void display()
 	glPopMatrix();
 	cor+=190;
 }
-	glFlush();
-	
+/*
+	glPushMatrix();
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[2]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTranslated(20.0,10.0,1.0);
+	glRotatef(-180,0,1.0,1.0);
+	glutSolidCone(10,30,100,100);
+	glPopMatrix();*/
+	/*glPushMatrix();
+	//chiquito
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[2]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTranslated(80.0,10.0,1.0);
+	glRotatef(-180,0,1.0,1.0);
+	glutSolidCone(7,18,100,100);
+	glPopMatrix();*/
+	double j1=0, cor1=20;
+    for(j1=0;j1<=2;j1+=1){
+	//pino grande
+	glPushMatrix();
+    glTranslatef(cor1,10,1.0);
+    pinos(2.75,5.0,10,30);
+    glPopMatrix();
+    //pino pequeño
+	glPushMatrix();
+    glTranslatef(60+cor1,10,1.0);
+    pinos(1.75,3.7,7,18);
+    glPopMatrix();
+    cor1+=185;
+}
+    	glFlush();
 	glutSwapBuffers();
 	
 	printf("%f ",X);
@@ -220,7 +316,7 @@ void resize(int w, int h) {
     glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-5,(Z),-15,85,(-Z),(Z));
+	glOrtho(-0,(Z),-15,80,(-Z),(Z));
 	//gluPerspective(300.0, (float)w / (float)h, 1, 120.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -232,7 +328,7 @@ void specialKeys( int key, int x, int y )
 	if (key == GLUT_KEY_RIGHT){
 					//				rotate_y += 7;}
 						//rotate_y -= 7;
-					X+=10;
+					X+=20;
 					//Z=Z+X;}
 					
 					}
@@ -240,7 +336,7 @@ void specialKeys( int key, int x, int y )
 	//  Flecha izquierda: rotación en eje Y negativo 7 grados
 	else if (key == GLUT_KEY_LEFT){
 								//rotate_y -= 7;
-					X-=10;
+					X-=20;
 					//Z=Z+X;}
 					}
 	/*//  Flecha arriba: rotación en eje X positivo 7 grados
