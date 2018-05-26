@@ -24,6 +24,7 @@ GLfloat Z = 125.0f;
 int frameNumber; // Numero de frames
 
 GLfloat scale = 1.0f;
+<<<<<<< HEAD
     GLUquadricObj* cylinder;  	
     void text()
 {
@@ -35,6 +36,11 @@ GLfloat scale = 1.0f;
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
 }
 
+=======
+GLUquadricObj* cylinder;  
+GLUquadricObj *sphere;	
+	
+>>>>>>> 8fb06fd4a4b3380235c1185e6098df8bc8288b80
 void init(void)
 {
 	glEnable(GL_LIGHTING);
@@ -174,6 +180,29 @@ void barril (float r,float al)
     glPopMatrix();
 }
 
+<<<<<<< HEAD
+=======
+void pelota (float r)
+{
+    glPushMatrix();
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[6]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
+    glTranslatef(0,0,0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+
+	sphere = gluNewQuadric();
+	gluQuadricTexture(sphere,texture[6]);
+	gluQuadricDrawStyle( sphere, GLU_FILL);
+	gluQuadricNormals( sphere, GLU_SMOOTH);
+	gluQuadricOrientation( sphere, GLU_OUTSIDE);
+	gluSphere(sphere, r, 200, 200);
+    glPopMatrix();
+}
+>>>>>>> 8fb06fd4a4b3380235c1185e6098df8bc8288b80
 
 void display()
 {
@@ -229,9 +258,17 @@ void display()
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
 							);
-		texture[5] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+	texture[5] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
 														(
 		"../img/orilla.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+							);
+							
+	texture[6] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+														(
+		"../img/ball.jpg",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
@@ -309,19 +346,28 @@ void display()
     
     //Barril
 	glPushMatrix();
-    glTranslatef(40,0.0,1.0);
+    glTranslatef(40,4.0,1.0);
     barril(3.5,8.0);
     glPopMatrix();    
+<<<<<<< HEAD
 	glPushMatrix();								
 	text();
 	glPopMatrix();
+=======
+    
+    //Balon
+    glPushMatrix();
+    glTranslatef(60,7.0,1.0);
+    pelota(3.0);
+    glPopMatrix();     
+    
+>>>>>>> 8fb06fd4a4b3380235c1185e6098df8bc8288b80
     glFlush();
 	glutSwapBuffers();
-	
-	printf("%f ",X);
 
 }
 
+<<<<<<< HEAD
 // --------------- Para animación ------------------------------------------
 	
 	int animating = 0; // 0 sin animación
@@ -386,6 +432,8 @@ void updateFrame() {
 	}
 	}
 
+=======
+>>>>>>> 8fb06fd4a4b3380235c1185e6098df8bc8288b80
 void resize(int w, int h) {
     glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
@@ -419,6 +467,7 @@ void specialKeys( int key, int x, int y )
 
 	//  Flecha derecha: aumentar rotación 7 grados
 	if (key == GLUT_KEY_RIGHT){
+<<<<<<< HEAD
 					//				rotate_y += 7;}
 						//rotate_y -= 7;
 					x+=20;
@@ -432,6 +481,14 @@ void specialKeys( int key, int x, int y )
 					x-=20;
 					//Z=Z+X;}
 					}
+=======
+		X+=20;
+	}
+
+	else if (key == GLUT_KEY_LEFT){
+		X-=20;
+	}
+>>>>>>> 8fb06fd4a4b3380235c1185e6098df8bc8288b80
 	/*//  Flecha arriba: rotación en eje X positivo 7 grados
 	else if (key == GLUT_KEY_UP)
 									//rotate_x += 7;
