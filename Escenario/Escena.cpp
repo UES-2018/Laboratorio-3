@@ -23,14 +23,41 @@ void init(void)
 	
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
-void esce(float xx,float yy,float xx1, float yy1)
+void esce(void)
 {	
 	glNormal3f( 0.0f, -1.0f,0.0f);
-	glTexCoord2f(80.0f, 0.0f); glVertex3f(xx, yy, 0.0);
-	glTexCoord2f(80.0f, 40.0f); glVertex3f(xx, yy1, 0);
-	glTexCoord2f(0.0f, 40.0f); glVertex3f(xx1, yy1, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(xx1, yy, 0.0);
+	glTexCoord2f(80.0f, 0.0f); glVertex3f(0, 10, 0.0);
+	glTexCoord2f(80.0f, 40.0f); glVertex3f(0, 80, 0);
+	glTexCoord2f(0.0f, 40.0f); glVertex3f(450, 80, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(450, 10, 0.0);
 	
+	}
+		void esfera (float r)
+	{
+	//glColor3f(1.0,0.0,1.0);
+	glutSolidSphere(r,100,100);
+}
+void nuve (void){
+	
+	glPushMatrix();
+    glTranslatef(15,58,1);
+	esfera(7.0);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(35,60,1);
+	esfera(7.0);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(24,55,1);
+	esfera(7.0);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(25,67,1);
+	esfera(7.0);
+	glPopMatrix();
+	glTranslatef(14,67,1);
+	esfera(7.0);
+	glPopMatrix();
 	}
 void display()
 {
@@ -60,7 +87,7 @@ void display()
 							);
 	texture[2] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
 														(
-		"../img/sue.jpg",
+		"../img/orilla.png",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
@@ -78,15 +105,15 @@ void display()
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	double i=0,ini=0,fin=120,ini1=0,fin1=120;
+	double i=0;
 	glBegin(GL_POLYGON);
-	for (i=0; i<=2; i+=1){
-		
-		esce(ini,20,fin,80);
-	ini=fin;
-	fin+=120;
+	for (i=120; i<=600; i+=120){
+		glTranslated(i,0,0);
+		esce();
 	
 }glEnd();
+
+/*
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture[2]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -98,40 +125,37 @@ void display()
 	ini1=fin1;
 	fin1+=120;
 	
-	}glEnd();
+	}glEnd();*/
 	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture[1]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    double ini2=0,fin2=120;
-	glBegin(GL_POLYGON);
-	for (i=0; i<=2; i+=1){
-	glBegin(GL_POLYGON);	
+    glBegin(GL_POLYGON);	
 	glNormal3f( -1.0f, 0.0f,0.0f);
-	glTexCoord2f(10.0f, 0.0f); glVertex3f(ini2, 0, 0.0);
-	glTexCoord2f(10.0f, 1.0f); glVertex3f(ini2, -15, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(fin2, -15, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(fin2, 0, 0.0);
-	ini2=fin2;
-	fin2+=120;
-	}glEnd();
+	glTexCoord2f(20.0f, 0.0f); glVertex3f(0, 0, 0.0);
+	glTexCoord2f(20.0f, 1.0f); glVertex3f(0, -15, 0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(450, -15, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(450, 0, 0.0);
 	
+	glEnd();
 	
+	 glDisable(GL_TEXTURE_2D);
 	
-/*	//loma
+	//loma
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture[2]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTranslatef(0,0,0.0000001);
+    //glTranslatef(0,0,0.0000001);
 	glBegin(GL_POLYGON);	
 	glNormal3f( -1.0f, 0.0f,0.0f);
-	glTexCoord2f(40.0f, 0.0f); glVertex3f(0, 0, 0.0);
-	glTexCoord2f(40.0f, 4.0f); glVertex3f(0, 20, 0);
-	glTexCoord2f(0.0f, 4.0f); glVertex3f(120, 20, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(120, 0, 0.0);
+	glTexCoord2f(20.0f, 0.0f); glVertex3f(0, 0, 0.0);
+	glTexCoord2f(20.0f, 1.0f); glVertex3f(0, 10, 0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(450, 10, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(450, 0, 0.0);
 	glEnd();
+	 glDisable(GL_TEXTURE_2D);
 	//loma 2
 	/*
 	glEnable(GL_TEXTURE_2D);
@@ -149,26 +173,34 @@ void display()
 	//piso
 	
 	/*glPushMatrix();
-	 glTranslatef(20,-7.4,1);
+	 glTranslatef(20,-5,1);
     // Agregar Codigo acá, para dibujar
     //glColor3f(1.0,0.0,0.0);
     glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[1]);
+	glBindTexture(GL_TEXTURE_2D, texture[2]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-     double i, x, y;   //Declaracion de Variables
+     double i1, x, y;   //Declaracion de Variables
     glPointSize(10.0); //Tamaño de los puntos
 	glBegin(GL_POLYGON);//Definimos la clase de primitiva
 	//Dibujamos el primer arco
-    for (i=0.37;i<=2.770; i+=0.01)
+    for (i1=0.37;i1<=2.770; i1+=0.01)
     {	
-		x=10.5*cos(i) +0.0;
-		y=20.5*sin(i) +0.0;	
+		x=10.5*cos(i1) +0.0;
+		y=40.5*sin(i1) +0.0;	
 		glTexCoord2f(1, 0);glVertex2f(x,y); 		
 	}
 	glEnd();
     glPopMatrix();*/
-     
+    glPushMatrix();
+	nuve();
+	glPopMatrix();
+	glPushMatrix();
+	
+	glTranslatef(90,-20,0);	
+	//glScalef(100,10,0);
+	nuve();
+	glPopMatrix();
 	glFlush();
 	
 	glutSwapBuffers();

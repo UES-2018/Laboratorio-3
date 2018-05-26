@@ -1,4 +1,4 @@
-# Install script for directory: /home/victor/Victor/Mario
+# Install script for directory: /home/victor/Victor/Mario/Escenario
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/victor/Victor/Mario/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/victor/Victor/Mario/Escenario/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
