@@ -15,7 +15,7 @@ GLfloat X = 0.0f;
 GLfloat Y = 0.0f;
 GLfloat Z = 125.0f+X;
 GLfloat scale = 1.0f;
-
+    GLUquadricObj* cylinder;  	
 void init(void)
 {
 	glEnable(GL_LIGHTING);
@@ -71,9 +71,9 @@ void esce(void)
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 5, 0.0);
 	
 	}
-		void esfera (float r)
-	{
-	//glColor3f(1.0,0.0,1.0);
+
+void esfera (float r)
+{
 	glutSolidSphere(r,100,100);
 }
 void nuve (void){
@@ -122,7 +122,27 @@ void pinos (float r,float al, float rc ,float alc)
 	glRotatef(-180,0,1.0,1.0);
 	glutSolidCone(rc,alc,100,100);
 	glPopMatrix();
-	}
+}
+
+void barril (float r,float al)
+{
+    glPushMatrix();
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[4]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
+    glTranslatef(0,0,0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+
+	cylinder = gluNewQuadric();
+	gluQuadricTexture(cylinder,texture[4]);
+	gluQuadricDrawStyle( cylinder, GLU_FILL );
+	gluCylinder( cylinder, 3.5, 3.5, 9.0, 211, 211);
+
+    glPopMatrix();
+}
 
 void display()
 {
@@ -172,6 +192,14 @@ void display()
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
 							);
 
+	texture[4] = SOIL_load_OGL_texture // load an image file directly as a new OpenGL texture
+														(
+		"../img/barril.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+							);
+
 ////////////////////////escenario de el fondo//////////////////////////////
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
@@ -184,20 +212,6 @@ void display()
 		esce();
 	
 }glEnd();
-
-/*
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[2]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glBegin(GL_POLYGON);
-	for (i=0; i<=2; i+=1){
-		
-		esce(ini1,0,fin1,20);
-	ini1=fin1;
-	fin1+=120;
-	
-	}glEnd();*/
 	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture[1]);
@@ -228,42 +242,7 @@ void display()
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(550, 0, 0.0);
 	glEnd();
 	 glDisable(GL_TEXTURE_2D);
-	//loma 2
-	/*
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[3]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTranslatef(0,0,0.00000001);
-	glBegin(GL_POLYGON);	
-	glNormal3f( -1.0f, 0.0f,0.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(70, 0, 0.0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(70, 15, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(110, 15, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(110, 0, 0.0);
-	glEnd();*/
-	//piso
-	
-/*	glPushMatrix();
-	 glTranslatef(40,-5,1);
-    // Agregar Codigo acá, para dibujar
-    //glColor3f(1.0,0.0,0.0);
-    glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[3]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-     double i1, x, y;   //Declaracion de Variables
-    glPointSize(10.0); //Tamaño de los puntos
-	glBegin(GL_POLYGON);//Definimos la clase de primitiva
-	//Dibujamos el primer arco
-    for (i1=0.37;i1<=2.770; i1+=0.01)
-    {	
-		x=10.5*cos(i1) +0.0;
-		y=20.5*sin(i1) +0.0;	
-		glTexCoord2f(1, 0);glVertex2f(x,y); 		
-	}
-	glEnd();
-    glPopMatrix();*/
+
     double j=0, cor=0;
     for(j=0;j<=2;j+=1){
     glPushMatrix();
@@ -278,26 +257,7 @@ void display()
 	glPopMatrix();
 	cor+=190;
 }
-/*
-	glPushMatrix();
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[2]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTranslated(20.0,10.0,1.0);
-	glRotatef(-180,0,1.0,1.0);
-	glutSolidCone(10,30,100,100);
-	glPopMatrix();*/
-	/*glPushMatrix();
-	//chiquito
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture[2]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTranslated(80.0,10.0,1.0);
-	glRotatef(-180,0,1.0,1.0);
-	glutSolidCone(7,18,100,100);
-	glPopMatrix();*/
+
 	double j1=0, cor1=20;
     for(j1=0;j1<=2;j1+=1){
 	//pino grande
@@ -311,8 +271,15 @@ void display()
     pinos(1.75,3.7,7,18);
     glPopMatrix();
     cor1+=185;
-}
-    	glFlush();
+    }
+    
+    //Barril
+	glPushMatrix();
+    glTranslatef(40,0.0,1.0);
+    barril(3.5,8.0);
+    glPopMatrix();    
+    
+    glFlush();
 	glutSwapBuffers();
 	
 	printf("%f ",X);
