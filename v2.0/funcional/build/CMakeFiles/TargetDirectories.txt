@@ -1,0 +1,3 @@
+/home/victor/Victor/Mario/v2.0/funcional/build/CMakeFiles/rebuild_cache.dir
+/home/victor/Victor/Mario/v2.0/funcional/build/CMakeFiles/edit_cache.dir
+/home/victor/Victor/Mario/v2.0/funcional/build/CMakeFiles/escena.dir

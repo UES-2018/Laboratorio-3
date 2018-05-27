@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/victor/Victor/Mario/v2.0/funcional/Escena.cpp
+stdio.h
+-
+GL/gl.h
+-
+GL/glut.h
+-
+SOIL/SOIL.h
+-
+cstdio
+-
+math.h
+-
+SDL2/SDL.h
+-
+
