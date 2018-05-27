@@ -12,7 +12,7 @@
 using namespace std;
 //variable para control de frame
 int frameNumber; 
-int ba[4],pe[4];
+//int ba[4],pe[4];
 //declaracion de variables globales
 void startAnimation(void);
 void startAnimation1(void);
@@ -954,42 +954,45 @@ void display()
     glPopMatrix();
     cor1+=185;
     }
-	//int ba[4]={};
+	int ba[4]={};
  	int j12=0, cor12=135;
     for(j12=0;j12<=3;j12+=1){
     //Barril
 	glPushMatrix();
-    glTranslatef(cor12,3.0,1.50);
+    glTranslatef(cor12+16,3.0,1.50);
     barril(3.5,8.0);
     glPopMatrix();
     ba[j12]={cor12};    
     cor12+=165;
   
     }
-    for(int k =0; k<=4; k++)
+   
+	int pe[4]={};
+    int j123=0, cor123=217;
+    for(j123=0;j123<=3;j123+=1){
+    //Balon
+    glPushMatrix();
+   // glTranslatef(X,0,0);
+    glTranslated(cor123 -37,-1.0,1.50);
+    glRotatef(yrot, 0, 1, 0);
+    pelota(3.0);
+    glPopMatrix(); 
+    pe[j123]={cor123};    
+	cor123+=175;
+    } 
+	 for(int k =0; k<3; k++)
     { 
-		if((-1*pe[k])==ba[k])
+		if((-X)==ba[k] || (-X)==pe[k])
 		{	
-			//pauseAnimation();
+			pauseAnimation();
+			pauseAnimation2();
 			printf("%s\n","jodido");
-			printf("%u\n",pe[k]);
-			printf("%u\n",ba[k]);
+			//printf("%u\n",pe[k]);
+			//printf("%u\n",ba[k]);
 			}
 		// printf("%u\n",pe[k]);
 		//break;
 	}
-    double j123=0, cor123=135;
-    for(j123=0;j123<=3;j123+=1){
-    //Balon
-    glPushMatrix();
-    glTranslatef(X,0,0);
-    glTranslated(cor123,-1.0,1.50);
-    glRotatef(yrot, 0, 1, 0);
-    pelota(3.0);
-    glPopMatrix();     
-	  cor123+=170;
-    } 
-   
 	    
 	glLineWidth(5);
     glCallList(1);
@@ -1003,7 +1006,7 @@ void display()
     
 
     glTranslatef(-1*X,1.50,2.50);
-    pe[4]={-X};
+    //pe[4]={-X};
     //Agregar Codigo acá, para dibujar
     glPushMatrix();
 		glTranslatef(0, TrasladarSalto, 1.50);
@@ -1055,15 +1058,16 @@ void updateFrame() {
 
         for (int i=1; i<=1; i++) {
 			
-			X-=2.0;
+			X-=1.0;
 			//x1rot+=1;
 		
                // rotateY=rotateY-= i;
         }
         //Verificamos el numero de frames para detener animación
-        if(frameNumber==450)
+        if(frameNumber==650)
         {
                 pauseAnimation();
+                pauseAnimation1();
                 //si se detiene la animacion detenemos el audio
                 //SDL_PauseAudio(1);
                 frameNumber=0;
@@ -1188,7 +1192,10 @@ void specialKeys( int key, int x, int y )
 	}
 	else if (key == GLUT_KEY_UP){
         startAnimation1();
-         pauseAnimation2();}
+        startAnimation();
+         pauseAnimation2();
+         X=X-1;
+         }
 	else if (key == GLUT_KEY_DOWN){
         TrasladarSalto=0;}
 	//  Tecla especial F2 : rotación en eje Z positivo 7 grados
@@ -1201,6 +1208,7 @@ void specialKeys( int key, int x, int y )
 	else if (key == GLUT_KEY_HOME){
 		PX=60;
 		X=0;
+		x1rot=0;
 	}
 									
 
