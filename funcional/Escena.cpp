@@ -6,7 +6,7 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 #define PI 3.1415927
-#define RUTA_AUDIO "imperial.wav" //nombre del archivo de audio
+#define RUTA_AUDIO "theme.wav" //nombre del archivo de audio
 
 
 using namespace std;
@@ -284,7 +284,7 @@ void Cargartextura(){
 void display()
 {
 	
-	glClearColor(0,0,0,0);
+	//glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -293,15 +293,15 @@ void display()
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//GLfloat light_ambient[]  = { 0.50f, 0.50f, 0.50f, 0.50f };
+	//GLfloat light_ambient[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
    // GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     //GLfloat light_position[] = { 20.0f, 1.0f, 1.0f, 0.0f };
-    //GLfloat light_position[] = { 80.0, 60.0, 20.0, 0.0 };
+    GLfloat light_position[] = { 80.0, 60.0, 20.0, 0.0 };
 
-    //glEnable(GL_LIGHT0);
-   // glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
+    glEnable(GL_LIGHT0);
+    //glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
     //glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);
-    //glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
 	glTranslatef(X,0.0f,0.0f);
 
@@ -359,7 +359,7 @@ void display()
     //glCallList(1);
     glPushMatrix();
     glTranslatef(-X,0,zoom1);
-    //Text();
+    Text();
     //glCallList(texto);
     glPopMatrix();
    glFlush();
@@ -496,13 +496,13 @@ void Init(void)
     glMatrixMode(GL_MODELVIEW);
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
 
 	//  Inicializar los parámetros GLUT y de usuario proceso
 	glutInit(&argc,argv);
 	// Solicitar ventana con color real y doble buffer con Z-buffer
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB );
 	glutInitWindowSize (800, 620);
 	glutInitWindowPosition (100, 50);
 	// Crear ventana
@@ -551,11 +551,11 @@ int main(int argc, char* argv[])
 	//frameNumber = 0;
 	//glutIdleFunc(text);
 	//pulsemos();
-		frameNumber = 0;
+	//rameNumber = 0;
 	//rotateX = rotateY = 0;
 	
 	// Activar iluminación
-	/*glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_NORMALIZE);
