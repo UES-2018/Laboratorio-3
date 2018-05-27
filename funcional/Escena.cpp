@@ -4,7 +4,10 @@
 #include <SOIL/SOIL.h>
 #include <cstdio>
 #include <math.h>
+#include <SDL2/SDL.h>
 #define PI 3.1415927
+//#define RUTA_AUDIO "imperial.wav" //nombre del archivo de audio
+
 
 using namespace std;
 
@@ -27,6 +30,14 @@ GLfloat scale = 1.0f;
 GLUquadricObj* cylinder;  
 GLUquadricObj *sphere;	
 int texto=1;
+	/*
+	// funcion para cargar audio
+	void my_audio_callback(void *userdata, Uint8 *stream, int len);
+	
+	// variables para audio
+	static Uint8 *audio_pos; // global pointer to the audio buffer to be played
+	static Uint32 audio_len; // remaining length of the sample we have to play
+	*/
 void init(void)
 {
 	glEnable(GL_LIGHTING);
@@ -44,7 +55,7 @@ void Text(void)
 	glPushMatrix();
     char text[32];
     sprintf(text, "Score:%.0f",x1rot);
-    glColor3f(0, 0, 0);
+    //glColor3f(0, 0, 0);
     glRasterPos3f( 100,70,zoom1);
     for(int i = 0; text[i] != '\0'; i++)
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
@@ -114,8 +125,8 @@ void esce(void)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glBegin(GL_POLYGON);
 	glNormal3f( 0.0f, -1.0f,0.0f);
-	glTexCoord2f(80.0f, 0.0f); glVertex3f(0, 5, 0.0);
-	glTexCoord2f(80.0f, 40.0f); glVertex3f(0, 80, 0);
+	glTexCoord2f(300.0f, 0.0f); glVertex3f(0, 5, 0.0);
+	glTexCoord2f(300.0f, 40.0f); glVertex3f(0, 80, 0);
 	glTexCoord2f(0.0f, 40.0f); glVertex3f(1000, 80, 0.0);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(1000, 5, 0.0);
 	glEnd();
@@ -131,8 +142,8 @@ void esce(void)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glBegin(GL_POLYGON);	
 	glNormal3f( -1.0f, 0.0f,0.0f);
-	glTexCoord2f(20.0f, 0.0f); glVertex3f(0, 0, 0.0);
-	glTexCoord2f(20.0f, 1.0f); glVertex3f(0, -7, 0);
+	glTexCoord2f(80.0f, 0.0f); glVertex3f(0, 0, 0.0);
+	glTexCoord2f(80.0f, 1.0f); glVertex3f(0, -7, 0);
 	glTexCoord2f(0.0f, 1.0f); glVertex3f(1000, -7, 0.0);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(1000, 0, 0.0);
 	
@@ -149,8 +160,8 @@ void esce(void)
     //glTranslatef(0,0,0.0000001);
 	glBegin(GL_POLYGON);	
 	glNormal3f( -1.0f, 0.0f,0.0f);
-	glTexCoord2f(120.0f, 0.0f); glVertex3f(0, 0, 0.0);
-	glTexCoord2f(120.0f, 1.0f); glVertex3f(0, 5, 0);
+	glTexCoord2f(400.0f, 0.0f); glVertex3f(0, 0, 0.0);
+	glTexCoord2f(400.0f, 1.0f); glVertex3f(0, 5, 0);
 	glTexCoord2f(0.0f, 1.0f); glVertex3f(1000, 5, 0.0);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(1000, 0, 0.0);
 	glEnd();
@@ -344,8 +355,9 @@ void display()
 	glLineWidth(5);
     glCallList(1);
     glPushMatrix();
-    glTranslatef(0,0,zoom1);
-    glCallList(texto);
+    glTranslatef(X,0,zoom1);
+    Text();
+    //glCallList(texto);
     glPopMatrix();
   //  glFlush();
 	glutSwapBuffers();
@@ -376,6 +388,7 @@ void updateFrame() {
         {
                 pauseAnimation();
                 //si se detiene la animacion detenemos el audio
+                //SDL_PauseAudio(1);
                 frameNumber=0;
                 X=0;
         }
@@ -443,6 +456,7 @@ void specialKeys( int key, int x, int y )
 void key(unsigned char key, int x, int y) {
         // La animación inicia al presionar la tecla espaciadora de igual forma se detiene
         if ( key == ' ' && animating==1) {
+				//SDL_PauseAudio(1);
                 pauseAnimation();
                // glTranslatef(0,0,1);      
 				//Text();
@@ -450,6 +464,7 @@ void key(unsigned char key, int x, int y) {
         else
         {
                 startAnimation();
+                //SDL_PauseAudio(0);
         }
         if (key == 27) {
                 exit(0);
@@ -483,28 +498,84 @@ int main(int argc, char* argv[])
 	glutInit(&argc,argv);
 
 	// Solicitar ventana con color real y doble buffer con Z-buffer
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
 
 	glutInitWindowSize (800, 620);
 	glutInitWindowPosition (100, 50);
 	// Crear ventana
 	glutCreateWindow("Escenario Mario");
-	Init();
-	Cargartextura();
+	//Init();
+/*	// sonido
+	// Inicializar SDL.
+	if (SDL_Init(SDL_INIT_AUDIO) < 0)
+	return 1;
+	
+	// Variables locales
+	static Uint32 wav_length; // Longitud de nuestra muestra
+	static Uint8 *wav_buffer; // Buffer que contiene nuestro archivo de audio
+	static SDL_AudioSpec wav_spec; // Las especificaciones de nuestra pieza de música
+	
+	/* Cargar el WAV */
+	// Las especificaciones, la longitud y el búfer de nuestro wav se llenan
+	/*if( SDL_LoadWAV(RUTA_AUDIO, &wav_spec, &wav_buffer, &wav_length) == NULL )
+	{
+	return 1;
+	}
+	// Establecer la función de devolución de llamada
+	wav_spec.callback = my_audio_callback;
+	wav_spec.userdata = NULL;
+	
+	// Establecer nuestras variables estáticas globales
+	audio_pos = wav_buffer; // Copia el buffer de sonido
+	audio_len = wav_length; // Copia la longitud del archivo
+	
+	/*Abrir el dispositivo de audio */
+/*	if ( SDL_OpenAudio(&wav_spec, NULL) < 0 )
+	{
+	fprintf(stderr, "No se pudo abrir el audio: %s\n", SDL_GetError());
+	exit(-1);
+	}*/
+	
 	// Habilitar la prueba de profundidad de Z-buffer
-	//glEnable(GL_DEPTH_TEST);
-
+	glEnable(GL_DEPTH_TEST);
+	Cargartextura();
 	// Funciones de retrollamada
 	glutDisplayFunc(display);
-	glutReshapeFunc(resize);
+	//glutReshapeFunc(resize);
 	glutKeyboardFunc(key);
 	glutSpecialFunc(specialKeys);
 	//frameNumber = 0;
 	//glutIdleFunc(text);
-	pulsemos();
+	//pulsemos();
 	glutMainLoop();
 
 	// Regresar al sistema operativo
 	return 0;
+/*
 
-}
+//SDL_PauseAudio(0);
+	while ( audio_len > 0 )
+	{
+	SDL_Delay(100); // espera un segundo para la pausa
+	}
+	SDL_CloseAudio();
+	SDL_FreeWAV(wav_buffer);*/
+	}
+	/*
+	//Función de devolución de llamada de audio donde se recoren los valores del bufer
+	void my_audio_callback(void *userdata, Uint8 *stream, int len)
+	{
+	
+	if (audio_len ==0)
+	return;
+	
+	len = ( len > audio_len ? audio_len : len );
+	
+	SDL_memcpy (stream, audio_pos, len); // Simplemente copie desde un buffer en el otro
+	//SDL_MixAudio(stream, audio_pos, len, SDL_MIX_MAXVOLUME / 2); // Mezclar de un buffer a otro
+	
+	audio_pos += len;
+	audio_len -= len;
+	}
+
+*/

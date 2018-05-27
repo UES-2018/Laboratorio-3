@@ -27,6 +27,11 @@ include_directories(${GLM_INCLUDE_DIRS})
 include_directories(/usr/include/SOIL) 
 link_directories(/usr/lib/SOIL) 
 
+########################################################
+# INCLUYENDO LIBRERIA SDL2
+########################################################
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
 #########################################################nea
 # Incluyendo archivos 
 #########################################################
@@ -36,5 +41,5 @@ add_executable(escena Escena.cpp) # Agregando nombre del script y compilado
 # Linkeo de librerías 
 #########################################################
 # creación del ejecutable "hello"
-target_link_libraries(escena ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${GLFW_STATIC_LIBRARIES} ${GLEW_LIBRARIES} SOIL) 
+target_link_libraries(escena ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${GLFW_STATIC_LIBRARIES} ${GLEW_LIBRARIES} SOIL ${SDL2_LIBRARIES}) 
 
