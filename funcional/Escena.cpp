@@ -355,7 +355,7 @@ void display()
 	glLineWidth(5);
     glCallList(1);
     glPushMatrix();
-    glTranslatef(X,0,zoom1);
+    glTranslatef(-X,0,zoom1);
     Text();
     //glCallList(texto);
     glPopMatrix();
@@ -394,6 +394,7 @@ void updateFrame() {
         }
         //Almacenamos el numero de frames
         frameNumber++;
+        x1rot=frameNumber;
         printf ("Numero de Frame: %d \n", frameNumber);
 }
 
