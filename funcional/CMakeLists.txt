@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8) #Versión mínima de cmake 
+cmake_minimum_required(VERSION 3.7) #Versión mínima de cmake 
 # Project Name
 PROJECT(LAB_OPenGL)
 
@@ -31,7 +31,9 @@ link_directories(/usr/lib/SOIL)
 # INCLUYENDO LIBRERIA SDL2
 ########################################################
 find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+include_directories( escena ${SDL2_INCLUDE_DIRS})
+find_file(SDL2_INCLUDE_DIR NAME SDL.h HINTS SDL2)
+find_library(SDL2_LIBRARY NAME SDL2)
 #########################################################nea
 # Incluyendo archivos 
 #########################################################
@@ -41,5 +43,5 @@ add_executable(escena Escena.cpp) # Agregando nombre del script y compilado
 # Linkeo de librerías 
 #########################################################
 # creación del ejecutable "hello"
-target_link_libraries(escena ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${GLFW_STATIC_LIBRARIES} ${GLEW_LIBRARIES} SOIL ${SDL2_LIBRARIES}) 
+target_link_libraries(escena ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${SDL2_LIBRARIES} SOIL) 
 

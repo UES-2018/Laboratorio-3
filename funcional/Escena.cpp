@@ -1,24 +1,19 @@
 #include <stdio.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include <SOIL/SOIL.h>
+//#include <SDL2/SDL.h>
 #include <cstdio>
 #include <math.h>
-#include <SDL2/SDL.h>
+#include <SOIL/SOIL.h>
 #define PI 3.1415927
-#define RUTA_AUDIO "theme.wav" //nombre del archivo de audio
+//#define RUTA_AUDIO "theme.wav" //nombre del archivo de audio
 
 
 using namespace std;
 
-int frameNumber; 
-// funcion para cargar audio
-	void my_audio_callback(void *userdata, Uint8 *stream, int len);
-	
-	// variables para audio
-	static Uint8 *audio_pos; // global pointer to the audio buffer to be played
-	static Uint32 audio_len; // remaining length of the sample we have to play
-	
+int frameNumber,caminar,saltar;   // Numero de frames 
+float trasladarIzq, trasladarDer,TrasladarSalto, rotateY; 
+
 //Arreglo de imagenes
 //GLuint texture[0];
 //Definimos variables
@@ -38,7 +33,7 @@ GLUquadricObj *sphere;
 int texto=1;
 	
 
-void init(void)
+void init(void) 
 {
 	//glEnable(GL_LIGHTING);
 	//glEnable(GL_LIGHT0); //Activamos las luces en 
@@ -171,7 +166,7 @@ void esce(void)
 	}
 
 void piernasIzq(void){
-	
+	glPushMatrix();
 	/////////////////////////////pierna lado izq////////////////////////////////////////////////////////////////////
 	glColor3f(0, 0, 0);
 	
@@ -215,7 +210,7 @@ void piernasIzq(void){
 	glBegin(GL_POLYGON);glVertex3f(9,2,0);glVertex3f(9,5,0);glVertex3f(12,5,0);glVertex3f(12,2,0);glEnd();
 	
 	glBegin(GL_POLYGON);glVertex3f(10,1,0);glVertex3f(10,2,0);glVertex3f(11,2,0);glVertex3f(11,1,0);glEnd();
-	
+	glPopMatrix();
 	
 	
 	
@@ -223,7 +218,7 @@ void piernasIzq(void){
 	
 }
 void piernaDer(void){
-	
+	 glPushMatrix();
 	/////////////////////////////pierna lado der/////////////////////////////////////////////
 	
 	glColor3f(0, 0, 0);
@@ -270,12 +265,11 @@ void piernaDer(void){
 	
 	glBegin(GL_POLYGON);glVertex3f(17,2,0);glVertex3f(17,3,0);glVertex3f(18,3,0);glVertex3f(18,2,0);glEnd();
 	
-	
+		glPopMatrix();
 	}
 
-
 void cabeza(void){
-	
+	 glPushMatrix();
 	glColor3f(0, 0, 0);
 	//orilla color negro de arriba a abajo y  de izq a der
 	
@@ -392,11 +386,11 @@ void cabeza(void){
 	
 	glBegin(GL_POLYGON);glVertex3f(19,30,0);glVertex3f(19,33,0);glVertex3f(20,33,0);glVertex3f(20,30,0);glEnd();
 	
-	
+		glPopMatrix();
 	
 	}
 void cuerpo(void){
-	
+	 glPushMatrix();
 	//////////////////////////////////////////////parte superior de las piernas orilla/////////////////////////////////////////////////
 	glColor3f(0, 0, 0);
 	
@@ -703,10 +697,8 @@ void cuerpo(void){
 	glBegin(GL_POLYGON);glVertex3f(3,27,0);glVertex3f(3,28,0);glVertex3f(4,28,0);glVertex3f(4,27,0);glEnd();
 	
 	glBegin(GL_POLYGON);glVertex3f(4,26,0);glVertex3f(4,27,0);glVertex3f(5,27,0);glVertex3f(5,26,0);glEnd();
-
+		glPopMatrix();
 }
-
-
 
 void esfera (float r)
 {	
@@ -832,11 +824,16 @@ void Cargartextura(){
     tex2 = loadTex("../img/sue.png");
     tex3 = loadTex("../img/gra1.png");
 }
+/*	// funcion para cargar audio
+void my_audio_callback(void *userdata, Uint8 *stream, int len);
 	
+	// variables para audio
+static Uint8 *audio_pos; // global pointer to the audio buffer to be played
+static Uint32 audio_len; // remaining length of the sample we have to play
+*/
 void display()
 {
-	
-	//glClearColor(0,0,0,0);
+	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -848,12 +845,12 @@ void display()
 	//GLfloat light_ambient[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
    // GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     //GLfloat light_position[] = { 20.0f, 1.0f, 1.0f, 0.0f };
-    GLfloat light_position[] = { 80.0, 60.0, 20.0, 0.0 };
+    //GLfloat light_position[] = { 80.0, 60.0, 20.0, 0.0 };
 
-    glEnable(GL_LIGHT0);
+    //glEnable(GL_LIGHT0);
     //glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
     //glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    //glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
 	glTranslatef(X,0.0f,0.0f);
 
@@ -865,7 +862,7 @@ void display()
 	glPopMatrix();
 
     double j=0, cor=0;
-    for(j=0;j<=2;j+=1){
+    for(j=0;j<=3;j+=1){
     glPushMatrix();
     glTranslatef(cor,0,0);
 	nuve();
@@ -880,7 +877,7 @@ void display()
 }
 
 	double j1=0, cor1=20;
-    for(j1=0;j1<=2;j1+=1){
+    for(j1=0;j1<=3;j1+=1){
 	//pino grande
 	glPushMatrix();
     glTranslatef(cor1,4,1.0);
@@ -893,43 +890,78 @@ void display()
     glPopMatrix();
     cor1+=185;
     }
- 
+ 	int j12=0, cor12=135;
+ 	int arrayBa[]={135,300,465,630};
+    for(j12=0;j12<=3;j12+=1){
     //Barril
 	glPushMatrix();
-    glTranslatef(40,4.0,1.10);
+    glTranslatef(cor12,3.0,1.50);
+    //arrayBa[j12]={cor12};
     barril(3.5,8.0);
     glPopMatrix();    
-    
+    cor12+=165;
+    }
+    int j123=0, cor123=135;
+    for(j123=0;j123<=3;j123+=1){
     //Balon
     glPushMatrix();
-    //glTranslatef(PX,7.0,1.10);
-    //glRotatef(yrot, 0, 1, 0);
+    glTranslatef(X,0,0);
+    glTranslated(cor123,-1.0,1.50);
+    glRotatef(yrot, 0, 1, 0);
     pelota(3.0);
     glPopMatrix();     
-	    
-	glLineWidth(5);
+	  cor123+=170;
+	;
+    }
+    for(int k=0; k<4; k++)
+    {	
+		 // cout << A << ' ';
+		  printf("posicion:(%f)",arrayBa[k]);
+		}
+	//glLineWidth(5);
     //glCallList(1);
     glPushMatrix();
     glTranslatef(-X,0,zoom1);
     Text();
     //glCallList(texto);
     glPopMatrix();
-<<<<<<< HEAD
-   glFlush();
-=======
-    
-    //TUX();
-    
-    glPointSize(1);
+
+   //glFlush();
+
+   // TUX();
+   // glPushMatrix();
+   /* glPointSize(1);
     glScalef(0.5,0.5,0.5);
-    glTranslatef(PX,7.0,1.10);
+    glTranslatef(-2*X,7.0,1.10);
     cabeza();
     cuerpo();
     piernasIzq();
-    piernaDer();
+    piernaDer();*/
+     //  glPopMatrix();
+     glTranslatef(-2*X,7.0,1.10);
+     // Agregar Codigo acá, para dibujar
+    glPushMatrix();
+		glTranslatef(0, TrasladarSalto, 0);
+		
+		glScalef(0.5,0.5,0.5);
+		glPushMatrix();
+		glTranslatef(0, -trasladarIzq/6, 0);
+		cabeza();
+		glPopMatrix();
+		cuerpo();
+		glPushMatrix();
+		glTranslatef(0, trasladarIzq, 0); 
+		piernasIzq();
+		glPopMatrix();
+		glPushMatrix();
+		glTranslatef(0,  -trasladarDer+4, 0); 
+		piernaDer();
+		glPopMatrix();
+    
+    glPopMatrix();
     
 	glFlush();
->>>>>>> 30edfa0003cfcd96767641e3c6e33ac3aa62b430
+
 	glutSwapBuffers();
 
 }
@@ -937,18 +969,23 @@ void display()
 // --------------- Para animación  ------------------------------------------
 
 int animating = 0;      // 0 sin animación
+int animating1 = 0;      // 0 sin animación
                         // Se cambia con la llamada a las funciones startAnimation() and pauseAnimation()
 
 void pauseAnimation() {
         // Llamamo a la función para detener la animación
         animating = 0;
 }
+void pauseAnimation1() {
+        // Llamamo a la función para detener la animación
+        animating1 = 0;
+}
 
 void updateFrame() {
         // En esta funcion agregamos el codigo que hara la secuencia de cada escena como si fuera un fotograma
         for (int i=1; i<=1; i++) {
 			X-=2.0;
-			//x1rot+=1;
+			yrot+=3;
 		
                // rotateY=rotateY-= i;
         }
@@ -961,12 +998,35 @@ void updateFrame() {
                 frameNumber=0;
                 X=0;
                 //si se detiene la animacion detenemos el audio
-                SDL_PauseAudio(1);
+               //SDL_PauseAudio(1);
         }
         //Almacenamos el numero de frames
         frameNumber++;
         x1rot=frameNumber;
         printf ("Numero de Frame: %d \n", frameNumber);
+	}
+void updateFrame1() {
+        // En esta funcion agregamos el codigo que hara la secuencia de cada escena como si fuera un fotograma
+     
+        if (saltar<11){
+		TrasladarSalto+= 2;
+    }
+   //Verificamos el numero de frames para detener animación 
+   else if(saltar>=11){
+		TrasladarSalto-= 2;  
+		if(saltar==20){
+			TrasladarSalto=0;
+			saltar=0;
+			pauseAnimation1();
+			}
+	}
+		
+	
+   
+  //Almacenamos el numero de frames 
+  saltar++;
+  printf ("Numero de Frame: %d \n", saltar);
+
 }
 
 void timerFunction(int timerID) {
@@ -978,11 +1038,27 @@ void timerFunction(int timerID) {
         }
 }
 
+void timerFunction1(int timerID2) {
+        // Invocamos la funcion para controlar el tiempo de la ejecucion de funciones
+        if (animating1) {
+               
+                 updateFrame1();
+                glutTimerFunc(30, timerFunction1, 2);
+                glutPostRedisplay();
+        }
+}
 void startAnimation() {
         // llamamos la función para iniciar la animación
         if ( !animating ) {
                 animating = 1;
                 glutTimerFunc(30, timerFunction, 1);
+        }
+}
+void startAnimation1() {
+        // llamamos la función para iniciar la animación
+        if ( !animating1 ) {
+                animating1 = 1;
+                glutTimerFunc(30, timerFunction1, 3);
         }
 }
 
@@ -992,13 +1068,15 @@ void specialKeys( int key, int x, int y )
 
 	//Mov Pelota, Proximamente de la figura
 	if (key == GLUT_KEY_RIGHT){
-		yrot -=20.0;
+		//yrot -=20.0;
         PX += 3.0f;
+         startAnimation1();
 	}
 
 	else if (key == GLUT_KEY_LEFT){
-		yrot -=20.0;
+		//yrot -=20.0;
         PX += 3.0f;
+        TrasladarSalto=0;
 	}
 	/*//  Flecha arriba: rotación en eje X positivo 7 grados
 	else if (key == GLUT_KEY_UP)
@@ -1028,7 +1106,7 @@ void specialKeys( int key, int x, int y )
 void key(unsigned char key, int x, int y) {
         // La animación inicia al presionar la tecla espaciadora de igual forma se detiene
         if ( key == ' ' && animating==1) {
-				SDL_PauseAudio(1);
+				//SDL_PauseAudio(1);
                 pauseAnimation();
                // glTranslatef(0,0,1);      
 				//Text();
@@ -1036,7 +1114,7 @@ void key(unsigned char key, int x, int y) {
         else
         {
                 startAnimation();
-                SDL_PauseAudio(0);
+                //SDL_PauseAudio(0);
         }
         if (key == 27) {
                 exit(0);
@@ -1049,8 +1127,8 @@ void Init(void)
     glEnable(GL_DEPTH_TEST);
     //glEnable(GL_LIGHTING);
    // glShadeModel(GL_SMOOTH);
-    glEnable(GL_COLOR_MATERIAL);
-    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+   // glEnable(GL_COLOR_MATERIAL);
+    //glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
     //glEnable(GL_LIGHT0);
 }
 	
@@ -1062,14 +1140,17 @@ void Init(void)
     gluPerspective(45, aspectRatio, 1.0, 100.0);
     glMatrixMode(GL_MODELVIEW);
 }
-
-int main(int argc, char** argv)
+void idle()
+{
+    display();
+}
+int main(int argc, char* argv[])
 {
 
 	//  Inicializar los parámetros GLUT y de usuario proceso
 	glutInit(&argc,argv);
 	// Solicitar ventana con color real y doble buffer con Z-buffer
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB );
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH |GLUT_SINGLE | GLUT_RGB );
 	glutInitWindowSize (800, 620);
 	glutInitWindowPosition (100, 50);
 	// Crear ventana
@@ -1077,7 +1158,7 @@ int main(int argc, char** argv)
 	//init();
 	// sonido
 	// Inicializar SDL.
-	if (SDL_Init(SDL_INIT_AUDIO) < 0)
+	/*if (SDL_Init(SDL_INIT_AUDIO) < 0)
 	return 1;
 	
 	// Variables locales
@@ -1087,7 +1168,7 @@ int main(int argc, char** argv)
 	
 	/* Cargar el WAV */
 	// Las especificaciones, la longitud y el búfer de nuestro wav se llenan
-	if( SDL_LoadWAV(RUTA_AUDIO, &wav_spec, &wav_buffer, &wav_length) == NULL )
+/*	if( SDL_LoadWAV(RUTA_AUDIO, &wav_spec, &wav_buffer, &wav_length) == NULL )
 	{
 	return 1;
 	}
@@ -1100,21 +1181,22 @@ int main(int argc, char** argv)
 	audio_len = wav_length; // Copia la longitud del archivo
 	
 	/*Abrir el dispositivo de audio */
-	if ( SDL_OpenAudio(&wav_spec, NULL) < 0 )
+/*	if ( SDL_OpenAudio(&wav_spec, NULL) < 0 )
 	{
 	fprintf(stderr, "No se pudo abrir el audio: %s\n", SDL_GetError());
 	exit(-1);
 	}
-
+*/
 	Cargartextura();
 	// Funciones de retrollamada
 	glutDisplayFunc(display);
 	//glutReshapeFunc(resize);
+	
 	glutKeyboardFunc(key);
 	glutSpecialFunc(specialKeys);
-		
+	glutIdleFunc(idle);
 	// Habilitar la prueba de profundidad de Z-buffer
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 	//frameNumber = 0;
 	//glutIdleFunc(text);
 	//pulsemos();
@@ -1122,7 +1204,7 @@ int main(int argc, char** argv)
 	//rotateX = rotateY = 0;
 	
 	// Activar iluminación
-	glEnable(GL_LIGHTING);
+	/*glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_NORMALIZE);
@@ -1131,6 +1213,8 @@ int main(int argc, char** argv)
 	//startAnimation();
 	/* Empezar a sonar */
 	//SDL_PauseAudio(0);
+	glDepthFunc(GL_LEQUAL);
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	glutMainLoop();
 
 	// Regresar al sistema operativo
@@ -1138,16 +1222,14 @@ int main(int argc, char** argv)
 
 
 //SDL_PauseAudio(0);
-	while ( audio_len > 0 )
+	/*while ( audio_len > 0 )
 	{
 	SDL_Delay(100); // espera un segundo para la pausa
 	}
 	SDL_CloseAudio();
-	SDL_FreeWAV(wav_buffer);
-	}
-	
+	SDL_FreeWAV(wav_buffer);*/}
 	//Función de devolución de llamada de audio donde se recoren los valores del bufer
-	void my_audio_callback(void *userdata, Uint8 *stream, int len)
+/*	void my_audio_callback(void *userdata, Uint8 *stream, int len)
 	{
 	
 	if (audio_len ==0)
@@ -1160,4 +1242,7 @@ int main(int argc, char** argv)
 	
 	audio_pos += len;
 	audio_len -= len;
-	}
+	
+	}*/
+	
+	

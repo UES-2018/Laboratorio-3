@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = -DGLEW_STATIC
 
-CXX_INCLUDES = -I/usr/include/SOIL -I/usr/include/SDL2 
+CXX_INCLUDES = -I/usr/include/SOIL -I/home/victor/Victor/Mario/funcional/escena -I/usr/include/SDL2 
 

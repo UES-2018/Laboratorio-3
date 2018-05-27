@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/escena.dir/Escena.cpp.o  -o escena  -L/usr/lib/SOIL -Wl,-rpath,/usr/lib/SOIL -rdynamic -lGLU -lGL -lglut -lXmu -lXi -lSOIL -L/usr/lib/x86_64-linux-gnu  -lSDL2 
+/usr/bin/c++      CMakeFiles/escena.dir/Escena.cpp.o  -o escena  -L/usr/lib/SOIL -Wl,-rpath,/usr/lib/SOIL /usr/lib/x86_64-linux-gnu/libGLU.so /usr/lib/x86_64-linux-gnu/libGL.so /usr/lib/x86_64-linux-gnu/libglut.so /usr/lib/x86_64-linux-gnu/libXmu.so /usr/lib/x86_64-linux-gnu/libXi.so -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lSOIL 

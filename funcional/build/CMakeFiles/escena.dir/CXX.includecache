@@ -6,19 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/sagas/opengl/SMB/github/funcional/Escena.cpp
+/home/victor/Victor/Mario/funcional/Escena.cpp
 stdio.h
 -
 GL/gl.h
 -
 GL/glut.h
 -
-SOIL/SOIL.h
--
 cstdio
 -
 math.h
 -
-SDL2/SDL.h
+SOIL/SOIL.h
 -
 
