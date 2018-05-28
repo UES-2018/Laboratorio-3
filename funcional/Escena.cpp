@@ -708,15 +708,228 @@ void esfera (float r)
 }
 
 void TUX(void){
-	glPushMatrix();
-
-	glBegin(GL_QUADS);
-		glVertex3f(51.5, 10.7, 1.1);
-		glVertex3f(51.5, 13.0, 1.1);
-		glVertex3f(52.6, 13.0, 1.1);
-		glVertex3f(52.6, 10.7, 1.1);
-	glEnd();
 	
+	
+	//Pata Izquierda
+	yellow();
+	T1();glVertex3f(0,3,0);T2();glVertex3f(1,3,0);T3();glVertex3f(1,5,0);T4();glVertex3f(0,5,0);glEnd();
+			
+	T1();;glVertex3f(1,2,0);T2();glVertex3f(10,2,0);T3();glVertex3f(10,12,0);T4();glVertex3f(1,12,0);glEnd();		
+			
+	T1();glVertex3f(4,1,0);T2();glVertex3f(15,1,0);T3();glVertex3f(15,2,0);T4();glVertex3f(4,2,0);glEnd();		
+			
+	T1();glVertex3f(9,0,0);T2();glVertex3f(14,0,0);T3();glVertex3f(14,1,0);T4();glVertex3f(9,1,0);glEnd();		
+
+	T1();glVertex3f(10,1,0);T2();glVertex3f(15,1,0);T3();glVertex3f(15,4,0);T4();glVertex3f(10,4,0);glEnd();		
+
+	T1();glVertex3f(10,4,0);T2();glVertex3f(14,4,0);T3();glVertex3f(14,6,0);T4();glVertex3f(10,6,0);glEnd();		
+
+	T1();glVertex3f(10,6,0);T2();glVertex3f(13,6,0);T3();glVertex3f(13,7,0);T4();glVertex3f(10,7,0);glEnd();		
+
+	T1();glVertex3f(10,7,0);T2();glVertex3f(12,7,0);T3();glVertex3f(12,8,0);T4();glVertex3f(10,8,0);glEnd();		
+	
+	T1();glVertex3f(10,8,0);T2();glVertex3f(11,8,0);T3();glVertex3f(11,11,0);T4();glVertex3f(10,11,0);glEnd();		
+	
+	T1();glVertex3f(5,12,0);T2();glVertex3f(10,12,0);T3();glVertex3f(10,13,0);T4();glVertex3f(5,13,0);glEnd();		
+	
+	T1();glVertex3f(6,13,0);T2();glVertex3f(10,13,0);T3();glVertex3f(10,14,0);T4();glVertex3f(6,14,0);glEnd();		
+	
+	T1();glVertex3f(6,14,0);T2();glVertex3f(8,14,0);T3();glVertex3f(8,15,0);T4();glVertex3f(6,15,0);glEnd();		
+	
+	//Pata Derecha
+	
+	T1();glVertex3f(27,1,0);T2();glVertex3f(28,1,0);T3();glVertex3f(28,6,0);T4();glVertex3f(27,6,0);glEnd();
+	
+	T1();glVertex3f(28,1,0);T2();glVertex3f(34,1,0);T3();glVertex3f(34,0,0);T4();glVertex3f(28,0,0);glEnd();
+	
+	T1();glVertex3f(28,1,0);T2();glVertex3f(35,1,0);T3();glVertex3f(35,11,0);T4();glVertex3f(28,11,0);glEnd();
+
+	T1();glVertex3f(28,11,0);T2();glVertex3f(31,11,0);T3();glVertex3f(31,14,0);T4();glVertex3f(28,14,0);glEnd();
+	
+	T1();glVertex3f(35,2,0);T2();glVertex3f(37,2,0);T3();glVertex3f(37,12,0);T4();glVertex3f(35,12,0);glEnd();
+	
+	T1();glVertex3f(37,3,0);T2();glVertex3f(38,3,0);T3();glVertex3f(38,13,0);T4();glVertex3f(37,13,0);glEnd();
+	
+	T1();glVertex3f(38,4,0);T2();glVertex3f(40,4,0);T3();glVertex3f(40,9,0);T4();glVertex3f(38,9,0);glEnd();
+	
+	T1();glVertex3f(40,5,0);T2();glVertex3f(41,5,0);T3();glVertex3f(41,8,0);T4();glVertex3f(40,8,0);glEnd();
+	
+	T1();glVertex3f(38,9,0);T2();glVertex3f(39,9,0);T3();glVertex3f(39,10,0);T4();glVertex3f(38,10,0);glEnd();
+	
+	T1();glVertex3f(36,12,0);T2();glVertex3f(37,12,0);T3();glVertex3f(37,13,0);T4();glVertex3f(36,13,0);glEnd();
+	
+	//BOCA
+	T1();glVertex3f(15,33,0);T2();glVertex3f(25,33,0);T3();glVertex3f(25,36,0);T4();glVertex3f(15,36,0);glEnd();
+	
+	T1();glVertex3f(16,33,0);T2();glVertex3f(24,33,0);T3();glVertex3f(24,32,0);T4();glVertex3f(16,32,0);glEnd();
+	
+	T1();glVertex3f(17,32,0);T2();glVertex3f(23,32,0);T3();glVertex3f(23,31,0);T4();glVertex3f(17,31,0);glEnd();
+	
+	T1();glVertex3f(16,36,0);T2();glVertex3f(23,36,0);T3();glVertex3f(23,37,0);T4();glVertex3f(16,37,0);glEnd();
+	
+	T1();glVertex3f(18,37,0);T2();glVertex3f(21,37,0);T3();glVertex3f(21,38,0);T4();glVertex3f(18,38,0);glEnd();
+	cerrar();
+	
+	
+	//Estomago
+	white();
+	T1();glVertex3f(14,7,0);T2();glVertex3f(27,7,0);T3();glVertex3f(27,30,0);T4();glVertex3f(14,30,0);glEnd();
+	
+	T1();glVertex3f(15,30,0);T2();glVertex3f(26,30,0);T3();glVertex3f(26,31,0);T4();glVertex3f(15,31,0);glEnd();
+	
+	T1();glVertex3f(15,31,0);T2();glVertex3f(17,31,0);T3();glVertex3f(17,32,0);T4();glVertex3f(15,32,0);glEnd();
+	
+	T1();glVertex3f(15,32,0);T2();glVertex3f(16,32,0);T3();glVertex3f(16,33,0);T4();glVertex3f(15,33,0);glEnd();
+	
+	T1();glVertex3f(13,6,0);T2();glVertex3f(25,6,0);T3();glVertex3f(25,7,0);T4();glVertex3f(13,7,0);glEnd();
+	
+	T1();glVertex3f(14,5,0);T2();glVertex3f(24,5,0);T3();glVertex3f(24,6,0);T4();glVertex3f(14,6,0);glEnd();
+	
+	T1();glVertex3f(16,4,0);T2();glVertex3f(21,4,0);T3();glVertex3f(21,5,0);T4();glVertex3f(16,5,0);glEnd();
+	
+	T1();glVertex3f(13,10,0);T2();glVertex3f(14,10,0);T3();glVertex3f(14,30,0);T4();glVertex3f(13,30,0);glEnd();
+	
+	T1();glVertex3f(12,11,0);T2();glVertex3f(13,11,0);T3();glVertex3f(13,28,0);T4();glVertex3f(12,28,0);glEnd();
+	
+	T1();glVertex3f(11,12,0);T2();glVertex3f(12,12,0);T3();glVertex3f(12,24,0);T4();glVertex3f(11,24,0);glEnd();
+	
+	T1();glVertex3f(10,14,0);T2();glVertex3f(11,14,0);T3();glVertex3f(11,20,0);T4();glVertex3f(10,20,0);glEnd();
+	
+	T1();glVertex3f(22,31,0);T2();glVertex3f(25,31,0);T3();glVertex3f(25,32,0);T4();glVertex3f(22,32,0);glEnd();
+	
+	T1();glVertex3f(24,32,0);T2();glVertex3f(25,32,0);T3();glVertex3f(25,33,0);T4();glVertex3f(24,33,0);glEnd();
+	
+	T1();glVertex3f(27,12,0);T2();glVertex3f(28,12,0);T3();glVertex3f(28,26,0);T4();glVertex3f(27,26,0);glEnd();
+	
+	T1();glVertex3f(28,14,0);T2();glVertex3f(29,14,0);T3();glVertex3f(29,25,0);T4();glVertex3f(28,25,0);glEnd();
+	
+	T1();glVertex3f(29,14,0);T2();glVertex3f(30,14,0);T3();glVertex3f(30,24,0);T4();glVertex3f(29,24,0);glEnd();
+	
+	T1();glVertex3f(30,15,0);T2();glVertex3f(31,15,0);T3();glVertex3f(31,23,0);T4();glVertex3f(30,23,0);glEnd();
+	
+	T1();glVertex3f(31,16,0);T2();glVertex3f(32,16,0);T3();glVertex3f(32,21,0);T4();glVertex3f(31,21,0);glEnd();
+	
+	T1();glVertex3f(32,17,0);T2();glVertex3f(33,17,0);T3();glVertex3f(33,19,0);T4();glVertex3f(32,19,0);glEnd();
+	
+	
+	//OJOS
+	
+	T1();glVertex3f(14,36,0);T2();glVertex3f(16,36,0);T3();glVertex3f(16,37,0);T4();glVertex3f(14,37,0);glEnd();
+	
+	T1();glVertex3f(14,36,0);T2();glVertex3f(15,36,0);T3();glVertex3f(15,41,0);T4();glVertex3f(14,41,0);glEnd();
+	
+	T1();glVertex3f(17,40,0);T2();glVertex3f(18,40,0);T3();glVertex3f(18,37,0);T4();glVertex3f(17,37,0);glEnd();
+	
+	T1();glVertex3f(14,40,0);T2();glVertex3f(18,40,0);T3();glVertex3f(18,41,0);T4();glVertex3f(14,41,0);glEnd();
+	
+	T1();glVertex3f(15,41,0);T2();glVertex3f(17,41,0);T3();glVertex3f(17,42,0);T4();glVertex3f(15,42,0);glEnd();
+	
+	
+	T1();glVertex3f(21,37,0);T2();glVertex3f(22,37,0);T3();glVertex3f(22,41,0);T4();glVertex3f(21,41,0);glEnd();
+	
+	T1();glVertex3f(22,40,0);T2();glVertex3f(24,40,0);T3();glVertex3f(24,42,0);T4();glVertex3f(22,42,0);glEnd();
+	
+	T1();glVertex3f(24,41,0);T2();glVertex3f(25,41,0);T3();glVertex3f(25,36,0);T4();glVertex3f(24,36,0);glEnd();
+	
+	T1();glVertex3f(23,36,0);T2();glVertex3f(24,36,0);T3();glVertex3f(24,37,0);T4();glVertex3f(23,37,0);glEnd();
+	cerrar();
+
+
+	//NEGRURA
+	black();
+	T1();glVertex3f(15,1,0);T2();glVertex3f(27,1,0);T3();glVertex3f(27,4,0);T4();glVertex3f(15,4,0);glEnd();
+	
+	T1();glVertex3f(14,4,0);T2();glVertex3f(16,4,0);T3();glVertex3f(16,5,0);T4();glVertex3f(14,5,0);glEnd();
+	
+	T1();glVertex3f(21,4,0);T2();glVertex3f(27,4,0);T3();glVertex3f(27,5,0);T4();glVertex3f(21,5,0);glEnd();
+	
+	T1();glVertex3f(24,5,0);T2();glVertex3f(27,5,0);T3();glVertex3f(27,6,0);T4();glVertex3f(24,6,0);glEnd();
+	
+	T1();glVertex3f(25,6,0);T2();glVertex3f(28,6,0);T3();glVertex3f(28,7,0);T4();glVertex3f(25,7,0);glEnd();
+	
+	T1();glVertex3f(27,7,0);T2();glVertex3f(28,7,0);T3();glVertex3f(28,12,0);T4();glVertex3f(27,12,0);glEnd();
+	
+	T1();glVertex3f(30,14,0);T2();glVertex3f(31,14,0);T3();glVertex3f(31,15,0);T4();glVertex3f(30,15,0);glEnd();
+	
+	T1();glVertex3f(31,11,0);T2();glVertex3f(32,11,0);T3();glVertex3f(32,16,0);T4();glVertex3f(31,16,0);glEnd();
+	
+	T1();glVertex3f(32,11,0);T2();glVertex3f(33,11,0);T3();glVertex3f(33,17,0);T4();glVertex3f(32,17,0);glEnd();
+	
+	T1();glVertex3f(33,11,0);T2();glVertex3f(34,11,0);T3();glVertex3f(34,28,0);T4();glVertex3f(33,28,0);glEnd();
+	
+	T1();glVertex3f(34,11,0);T2();glVertex3f(35,11,0);T3();glVertex3f(35,27,0);T4();glVertex3f(34,27,0);glEnd();
+	
+	T1();glVertex3f(35,12,0);T2();glVertex3f(36,12,0);T3();glVertex3f(36,24,0);T4();glVertex3f(35,24,0);glEnd();
+	
+	T1();glVertex3f(36,13,0);T2();glVertex3f(37,13,0);T3();glVertex3f(37,22,0);T4();glVertex3f(36,22,0);glEnd();
+	
+	T1();glVertex3f(37,15,0);T2();glVertex3f(38,15,0);T3();glVertex3f(38,20,0);T4();glVertex3f(37,20,0);glEnd();
+	
+	T1();glVertex3f(32,19,0);T2();glVertex3f(33,19,0);T3();glVertex3f(33,28,0);T4();glVertex3f(32,28,0);glEnd();
+	
+	T1();glVertex3f(31,21,0);T2();glVertex3f(32,21,0);T3();glVertex3f(32,30,0);T4();glVertex3f(31,30,0);glEnd();
+	
+	T1();glVertex3f(30,23,0);T2();glVertex3f(31,23,0);T3();glVertex3f(31,32,0);T4();glVertex3f(30,32,0);glEnd();
+	
+	T1();glVertex3f(29,24,0);T2();glVertex3f(30,24,0);T3();glVertex3f(30,35,0);T4();glVertex3f(29,35,0);glEnd();
+	
+	T1();glVertex3f(28,25,0);T2();glVertex3f(29,25,0);T3();glVertex3f(29,42,0);T4();glVertex3f(28,42,0);glEnd();
+	
+	T1();glVertex3f(27,26,0);T2();glVertex3f(28,26,0);T3();glVertex3f(28,45,0);T4();glVertex3f(27,45,0);glEnd();
+	
+	T1();glVertex3f(26,30,0);T2();glVertex3f(27,30,0);T3();glVertex3f(27,47,0);T4();glVertex3f(26,47,0);glEnd();
+	
+	T1();glVertex3f(25,31,0);T2();glVertex3f(26,31,0);T3();glVertex3f(26,47,0);T4();glVertex3f(25,47,0);glEnd();
+	
+	T1();glVertex3f(24,41,0);T2();glVertex3f(25,41,0);T3();glVertex3f(25,49,0);T4();glVertex3f(24,49,0);glEnd();
+	
+	T1();glVertex3f(22,42,0);T2();glVertex3f(24,42,0);T3();glVertex3f(24,49,0);T4();glVertex3f(22,49,0);glEnd();
+	
+	T1();glVertex3f(21,41,0);T2();glVertex3f(22,41,0);T3();glVertex3f(22,50,0);T4();glVertex3f(21,50,0);glEnd();
+	
+	T1();glVertex3f(18,38,0);T2();glVertex3f(21,38,0);T3();glVertex3f(21,50,0);T4();glVertex3f(18,50,0);glEnd();
+	
+	T1();glVertex3f(22,37,0);T2();glVertex3f(24,37,0);T3();glVertex3f(24,40,0);T4();glVertex3f(22,40,0);glEnd();
+	
+	T1();glVertex3f(15,37,0);T2();glVertex3f(17,37,0);T3();glVertex3f(17,40,0);T4();glVertex3f(15,40,0);glEnd();
+	
+	T1();glVertex3f(17,41,0);T2();glVertex3f(18,41,0);T3();glVertex3f(18,49,0);T4();glVertex3f(17,49,0);glEnd();
+	
+	T1();glVertex3f(15,42,0);T2();glVertex3f(17,42,0);T3();glVertex3f(17,48,0);T4();glVertex3f(15,48,0);glEnd();
+	
+	T1();glVertex3f(14,41,0);T2();glVertex3f(15,41,0);T3();glVertex3f(15,45,0);T4();glVertex3f(14,45,0);glEnd();
+	
+	T1();glVertex3f(13,33,0);T2();glVertex3f(14,33,0);T3();glVertex3f(14,43,0);T4();glVertex3f(13,43,0);glEnd();
+	
+	T1();glVertex3f(12,36,0);T2();glVertex3f(13,36,0);T3();glVertex3f(13,42,0);T4();glVertex3f(12,42,0);glEnd();
+	
+	T1();glVertex3f(14,30,0);T2();glVertex3f(15,30,0);T3();glVertex3f(15,36,0);T4();glVertex3f(14,36,0);glEnd();
+	
+	T1();glVertex3f(13,28,0);T2();glVertex3f(14,28,0);T3();glVertex3f(14,31,0);T4();glVertex3f(13,31,0);glEnd();
+	
+	T1();glVertex3f(12,25,0);T2();glVertex3f(13,25,0);T3();glVertex3f(13,30,0);T4();glVertex3f(12,30,0);glEnd();
+	
+	T1();glVertex3f(11,22,0);T2();glVertex3f(12,22,0);T3();glVertex3f(12,28,0);T4();glVertex3f(11,28,0);glEnd();
+	
+	T1();glVertex3f(10,20,0);T2();glVertex3f(11,20,0);T3();glVertex3f(11,27,0);T4();glVertex3f(10,27,0);glEnd();
+	
+	T1();glVertex3f(9,14,0);T2();glVertex3f(10,14,0);T3();glVertex3f(10,25,0);T4();glVertex3f(9,25,0);glEnd();
+	
+	T1();glVertex3f(8,14,0);T2();glVertex3f(9,14,0);T3();glVertex3f(9,23,0);T4();glVertex3f(8,23,0);glEnd();
+	
+	T1();glVertex3f(7,15,0);T2();glVertex3f(8,15,0);T3();glVertex3f(8,20,0);T4();glVertex3f(7,20,0);glEnd();
+	
+	T1();glVertex3f(6,15,0);T2();glVertex3f(7,15,0);T3();glVertex3f(7,18,0);T4();glVertex3f(6,18,0);glEnd();
+	
+	T1();glVertex3f(10,11,0);T2();glVertex3f(11,11,0);T3();glVertex3f(11,14,0);T4();glVertex3f(10,14,0);glEnd();
+	
+	T1();glVertex3f(11,8,0);T2();glVertex3f(12,8,0);T3();glVertex3f(12,12,0);T4();glVertex3f(11,12,0);glEnd();
+	
+	T1();glVertex3f(12,7,0);T2();glVertex3f(13,7,0);T3();glVertex3f(13,11,0);T4();glVertex3f(12,11,0);glEnd();
+	
+	T1();glVertex3f(13,7,0);T2();glVertex3f(14,7,0);T3();glVertex3f(14,10,0);T4();glVertex3f(13,10,0);glEnd();
+	cerrar();
+
 	glPopMatrix();
 }
 

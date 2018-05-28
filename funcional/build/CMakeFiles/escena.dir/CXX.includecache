@@ -13,6 +13,8 @@ GL/gl.h
 -
 GL/glut.h
 -
+SDL2/SDL.h
+-
 cstdio
 -
 math.h
