@@ -6,7 +6,7 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 #define PI 3.1415927
-//#define RUTA_AUDIO "imperial.wav" //nombre del archivo de audio
+#define RUTA_AUDIO "imperial.wav" //nombre del archivo de audio
 
 
 using namespace std;
@@ -29,7 +29,7 @@ double rotate_z=0;
 float x1rot = 0.00, y1rot = 0.00, zoom1 = 1;
 double PX=65;
 double yrot=0;
-GLuint tex1,tex2,tex3,tex4,tex5,tex6,tex7;
+GLuint tex1,tex2,tex3,tex4,tex5,tex6,tex7,negro, gris, cafe, grisclaro, rojo, blanco,tex8,tex9,tex10;
 GLfloat X = 0.0f;
 GLfloat Y = 0.0f;
 GLfloat Z = 125.0f+X;
@@ -42,8 +42,6 @@ float scale = 2;  // escala en  x, y, and z
 
 int frameN,caminar,saltar;   // Numero de frames 
 float trasladarIzq, trasladarDer,TrasladarSalto, rotateY; 
-
-GLuint negro, gris, cafe, grisclaro, rojo, blanco;
 
 void init(void)
 {
@@ -200,8 +198,8 @@ void esce(void)
 	glNormal3f( 0.0f, -1.0f,0.0f);
 	glTexCoord2f(300.0f, 0.0f); glVertex3f(0, 5, 0.0);
 	glTexCoord2f(300.0f, 40.0f); glVertex3f(0, 80, 0);
-	glTexCoord2f(0.0f, 40.0f); glVertex3f(1000, 80, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(1000, 5, 0.0);
+	glTexCoord2f(0.0f, 40.0f); glVertex3f(600, 80, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(600, 5, 0.0);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
@@ -217,8 +215,8 @@ void esce(void)
 	glNormal3f( -1.0f, 0.0f,0.0f);
 	glTexCoord2f(80.0f, 0.0f); glVertex3f(0, 0, 0.0);
 	glTexCoord2f(80.0f, 1.0f); glVertex3f(0, -7, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(1000, -7, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(1000, 0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(600, -7, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(600, 0, 0.0);
 	
 	glEnd();
 	
@@ -235,8 +233,63 @@ void esce(void)
 	glNormal3f( -1.0f, 0.0f,0.0f);
 	glTexCoord2f(400.0f, 0.0f); glVertex3f(0, 0, 0.0);
 	glTexCoord2f(400.0f, 1.0f); glVertex3f(0, 5, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(1000, 5, 0.0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(1000, 0, 0.0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(600, 5, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(600, 0, 0.0);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+	
+	}
+
+void esce2(int x, int x1)
+{	
+	glPushMatrix();
+	//cielo
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex8);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glBegin(GL_POLYGON);
+	glNormal3f( 0.0f, -1.0f,0.0f);
+	glTexCoord2f(100.0f, 0.0f); glVertex3f(x, 5, 0.0);
+	glTexCoord2f(100.0f, 20.0f); glVertex3f(x, 80, 0);
+	glTexCoord2f(0.0f, 20.0f); glVertex3f(x1, 80, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x1, 5, 0.0);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+	
+	glPushMatrix();
+	//cesped
+	
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex2);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glBegin(GL_POLYGON);	
+	glNormal3f( -1.0f, 0.0f,0.0f);
+	glTexCoord2f(80.0f, 0.0f); glVertex3f(x, 0, 0.0);
+	glTexCoord2f(80.0f, 1.0f); glVertex3f(x, -7, 0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x1, -7, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x1, 0, 0.0);
+	
+	glEnd();
+	
+	 glDisable(GL_TEXTURE_2D);
+	 glPopMatrix();
+	 glPushMatrix();
+	 	//lava
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex4);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    //glTranslatef(0,0,0.0000001);
+	glBegin(GL_POLYGON);	
+	glNormal3f( -1.0f, 0.0f,0.0f);
+	glTexCoord2f(400.0f, 0.0f); glVertex3f(x, 0, 0.0);
+	glTexCoord2f(400.0f, 1.0f); glVertex3f(x, 5, 0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x1, 5, 0.0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x1, 0, 0.0);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
@@ -879,13 +932,14 @@ void pelota (float r)
 }
 
 void Cargartextura(){
+	tex1 = loadTex("../img/fondo.png");
+    tex2 = loadTex("../img/sue.png");
+    tex3 = loadTex("../img/gra1.png");
     tex4 = loadTex("../img/troco.jpg");
     tex5 = loadTex("../img/orilla.png");
     tex6 = loadTex("../img/barril.png");
     tex7 = loadTex("../img/ball.jpg");
-    tex1 = loadTex("../img/fondo.png");
-    tex2 = loadTex("../img/sue.png");
-    tex3 = loadTex("../img/gra1.png");
+    tex8 = loadTex("../img/estre1.jpg");    
     negro = loadTex("../TexturaD/negro.png"); 
     gris= loadTex("../TexturaD/gris.png");
     cafe = loadTex("../TexturaD/cafe.png");
@@ -923,7 +977,9 @@ void display()
 	glPushMatrix();
 	esce();
 	glPopMatrix();
-
+	glPushMatrix();
+	esce2(600,1200);
+	glPopMatrix();
     double j=0, cor=0;
     for(j=0;j<=2;j+=1){
     glPushMatrix();
@@ -941,7 +997,7 @@ void display()
 
 	//glTranslatef(0,4.25,0.50);
 	double j1=0, cor1=20;
-    for(j1=0;j1<=2;j1+=1){
+    for(j1=0;j1<=3;j1+=1){
 	//pino grande
 	glPushMatrix();
     glTranslatef(cor1,4.25,1.50);
@@ -954,9 +1010,9 @@ void display()
     glPopMatrix();
     cor1+=185;
     }
-	int ba[4]={};
+	int ba[8]={};
  	int j12=0, cor12=135;
-    for(j12=0;j12<=3;j12+=1){
+    for(j12=0;j12<=8;j12+=1){
     //Barril
 	glPushMatrix();
     glTranslatef(cor12+16,3.0,1.50);
@@ -967,9 +1023,9 @@ void display()
   
     }
    
-	int pe[4]={};
+	int pe[8]={};
     int j123=0, cor123=217;
-    for(j123=0;j123<=3;j123+=1){
+    for(j123=0;j123<=8;j123+=1){
     //Balon
     glPushMatrix();
    // glTranslatef(X,0,0);
@@ -980,13 +1036,13 @@ void display()
     pe[j123]={cor123};    
 	cor123+=175;
     } 
-	 for(int k =0; k<3; k++)
+	 for(int k =0; k<7; k++)
     { 
 		if((-X)==ba[k] || (-X)==pe[k])
 		{	
-			pauseAnimation();
-			pauseAnimation2();
-			printf("%s\n","jodido");
+			//pauseAnimation();
+			//pauseAnimation2();
+			//printf("%s\n","jodido");
 			//printf("%u\n",pe[k]);
 			//printf("%u\n",ba[k]);
 			}
@@ -1058,13 +1114,13 @@ void updateFrame() {
 
         for (int i=1; i<=1; i++) {
 			
-			X-=1.0;
+			X-=5.0;
 			//x1rot+=1;
 		
                // rotateY=rotateY-= i;
         }
         //Verificamos el numero de frames para detener animación
-        if(frameNumber==650)
+        if(frameNumber==2000)
         {
                 pauseAnimation();
                 pauseAnimation1();
@@ -1115,7 +1171,7 @@ void updateFrame2() {
     //Almacenamos el numero de frames 
     frameN++;
     //Verificamos el numero de frames para detener animación
-    if(frameN==450){
+    if(frameN==2000){
         pauseAnimation2();
         //si se detiene la animacion detenemos el audio
         //SDL_PauseAudio(1);
@@ -1209,6 +1265,7 @@ void specialKeys( int key, int x, int y )
 		PX=60;
 		X=0;
 		x1rot=0;
+		frameNumber=0;
 	}
 									
 
@@ -1267,7 +1324,7 @@ int main(int argc, char* argv[])
     
 	//Init();
 	// Habilitar la prueba de profundidad de Z-buffer
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 	Cargartextura();
 	// Funciones de retrollamada
 	glutDisplayFunc(display);

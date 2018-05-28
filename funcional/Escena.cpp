@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
-//#include <SDL2/SDL.h>
+#include <SDL2/SDL.h>
 #include <cstdio>
 #include <math.h>
 #include <SOIL/SOIL.h>
 #define PI 3.1415927
-//#define RUTA_AUDIO "theme.wav" //nombre del archivo de audio
+#define RUTA_AUDIO "theme.wav" //nombre del archivo de audio
 
 
 using namespace std;
@@ -816,21 +816,21 @@ void pelota (float r)
 }
 
 void Cargartextura(){
-    tex4 = loadTex("../img/troco.jpg");
-    tex5 = loadTex("../img/orilla.png");
-    tex6 = loadTex("../img/barril.png");
-    tex7 = loadTex("../img/ball.jpg");
-    tex1 = loadTex("../img/fondo.png");
-    tex2 = loadTex("../img/sue.png");
-    tex3 = loadTex("../img/gra1.png");
+    tex4 = loadTex("/home/victor/Victor/Mario/funcional/img/troco.jpg");
+    tex5 = loadTex("/home/victor/Victor/Mario/funcional/img/orilla.png");
+    tex6 = loadTex("/home/victor/Victor/Mario/funcional/img/barril.png");
+    tex7 = loadTex("/home/victor/Victor/Mario/funcional/img/ball.jpg");
+    tex1 = loadTex("/home/victor/Victor/Mario/funcional/img/fondo.png");
+    tex2 = loadTex("/home/victor/Victor/Mario/funcional/img/sue.png");
+    tex3 = loadTex("/home/victor/Victor/Mario/funcional/img/gra1.png");
 }
-/*	// funcion para cargar audio
+	// funcion para cargar audio
 void my_audio_callback(void *userdata, Uint8 *stream, int len);
 	
 	// variables para audio
 static Uint8 *audio_pos; // global pointer to the audio buffer to be played
 static Uint32 audio_len; // remaining length of the sample we have to play
-*/
+
 void display()
 {
 	glClearColor(0,0,0,0);
@@ -1106,7 +1106,7 @@ void specialKeys( int key, int x, int y )
 void key(unsigned char key, int x, int y) {
         // La animación inicia al presionar la tecla espaciadora de igual forma se detiene
         if ( key == ' ' && animating==1) {
-				//SDL_PauseAudio(1);
+				SDL_PauseAudio(1);
                 pauseAnimation();
                // glTranslatef(0,0,1);      
 				//Text();
@@ -1114,7 +1114,7 @@ void key(unsigned char key, int x, int y) {
         else
         {
                 startAnimation();
-                //SDL_PauseAudio(0);
+                SDL_PauseAudio(0);
         }
         if (key == 27) {
                 exit(0);
@@ -1144,7 +1144,7 @@ void idle()
 {
     display();
 }
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
 
 	//  Inicializar los parámetros GLUT y de usuario proceso
@@ -1158,7 +1158,7 @@ int main(int argc, char* argv[])
 	//init();
 	// sonido
 	// Inicializar SDL.
-	/*if (SDL_Init(SDL_INIT_AUDIO) < 0)
+	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 	return 1;
 	
 	// Variables locales
@@ -1168,7 +1168,7 @@ int main(int argc, char* argv[])
 	
 	/* Cargar el WAV */
 	// Las especificaciones, la longitud y el búfer de nuestro wav se llenan
-/*	if( SDL_LoadWAV(RUTA_AUDIO, &wav_spec, &wav_buffer, &wav_length) == NULL )
+	if( SDL_LoadWAV(RUTA_AUDIO, &wav_spec, &wav_buffer, &wav_length) == NULL )
 	{
 	return 1;
 	}
@@ -1181,12 +1181,12 @@ int main(int argc, char* argv[])
 	audio_len = wav_length; // Copia la longitud del archivo
 	
 	/*Abrir el dispositivo de audio */
-/*	if ( SDL_OpenAudio(&wav_spec, NULL) < 0 )
+	if ( SDL_OpenAudio(&wav_spec, NULL) < 0 )
 	{
 	fprintf(stderr, "No se pudo abrir el audio: %s\n", SDL_GetError());
 	exit(-1);
 	}
-*/
+
 	Cargartextura();
 	// Funciones de retrollamada
 	glutDisplayFunc(display);
@@ -1221,15 +1221,15 @@ int main(int argc, char* argv[])
 	return 0;
 
 
-//SDL_PauseAudio(0);
-	/*while ( audio_len > 0 )
+	SDL_PauseAudio(0);
+	while ( audio_len > 0 )
 	{
 	SDL_Delay(100); // espera un segundo para la pausa
 	}
 	SDL_CloseAudio();
-	SDL_FreeWAV(wav_buffer);*/}
+	SDL_FreeWAV(wav_buffer);}
 	//Función de devolución de llamada de audio donde se recoren los valores del bufer
-/*	void my_audio_callback(void *userdata, Uint8 *stream, int len)
+	void my_audio_callback(void *userdata, Uint8 *stream, int len)
 	{
 	
 	if (audio_len ==0)
@@ -1243,6 +1243,6 @@ int main(int argc, char* argv[])
 	audio_pos += len;
 	audio_len -= len;
 	
-	}*/
+	}
 	
 	
